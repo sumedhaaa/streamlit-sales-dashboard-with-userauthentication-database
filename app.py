@@ -19,7 +19,9 @@ users = db.fetch_all_users()
 
 usernames = [user["key"] for user in users]
 names = [user["name"] for user in users]
-hashed_passwords = [user["password"] for user in users]
+passwords = [user["password"] for user in users]
+
+hashed_passwords=stauth.Hasher(passwords).generate()
 
 authenticator = stauth.Authenticate(names, usernames, hashed_passwords,
     "sales_dashboard", "abcdef", cookie_expiry_days=30)
